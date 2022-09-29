@@ -1,18 +1,32 @@
-# Express.js-Boilerplate
+# What's this?
 
-Uses `nodemon` and `ejs`
+[Qurl.gq](https://qurl.gq) is a simple URL shortener, allowing for custom shortlinks along with humorous filters.
 
-- Ejs templates under views/
-- CSS & JS under public/
+# Screenshots
+
+`Coming Soon`
 
 # Setup
+
+Clone the repo
+```bash
+git clone https://github.com/TheRedstoneRadiant/Qurl.gq
+cd Qurl.gq
+```
+
+Copy .env.example and replace variables
+```bash
+cp .env.example .env
+nano .env
+```
 
 Install dependencies
 ```bash
 npm install
 ```
 
-Run server
+Start development server
 ```bash
-npm start
+npm run dev
 ````
+
