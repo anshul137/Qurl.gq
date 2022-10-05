@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
         
         <!-- JavaScript -->
-        <script src="js/index.js"></script>
+        <script src="js/index.js" defer></script>
     </head>
 
     <body class="container">
@@ -19,12 +19,14 @@
         </header>
 
         <main>
-            <label for="url">
-                URL:
-                <input placeholder="https://duckduckgo.com" type="text" name="url" id="url" required>
-            </label>
-            <button type="submit">Shorten URL</button>
-            <!-- TODO validate and apply aria-invalid="false" or "true" -->
+            <form>
+                <label for="url">
+                    URL:
+                    <input placeholder="https://duckduckgo.com" type="text" name="urlInput" required>
+                </label>
+                <button type="submit" name="submitButton">Shorten URL</button>
+                <!-- TODO validate and apply aria-invalid="false" or "true" -->
+            </form>
         </main>
 
         <!-- Footer -->
