@@ -6,7 +6,8 @@
   },
   "dependencies": {
     "ejs": "^3.0.2",
-    "express.js": "^1.0.0"
+    "express.js": "^1.0.0",
+    "mongodb": "^4.10.0"
   },
   "devDependencies": {
     "dotenv": "^16.0.2",
