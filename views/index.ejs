@@ -10,10 +10,30 @@
         <script src="js/index.js"></script>
     </head>
 
-    <body>
-        <h1>Qurl.gq</h1>
-        <p>URL: </p>
-        <input type="text" name="url">
-        <button>Shorten URL</button>
+    <body class="container">
+        <header>
+            <hgroup>
+                <h1>Qurl.gq</h1>
+                <h3>A simple URL Shortener written in Node.js 🔗</h3>
+            </hgroup>
+        </header>
+
+        <main>
+            <label for="url">
+                URL:
+                <input placeholder="https://duckduckgo.com" type="text" name="url" id="url" required>
+            </label>
+            <button type="submit">Shorten URL</button>
+            <!-- TODO validate and apply aria-invalid="false" or "true" -->
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <nav>
+                <ul>
+                    <li><a href="https://github.com/TheRedstoneRadiant/Qurl.gq">Github</a></li>
+                </ul>
+            </nav>
+        </footer>
     </body>
 </html>
