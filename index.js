@@ -3,6 +3,19 @@ if (process.env["DEV"]) {
 }
 
 const express = require("express");
+const { MongoClient } = require('mongodb');
+
+const client = new MongoClient(process.env["MONGO_URI"], { useNewUrlParser: true, useUnifiedTopology: true });
+
+client.connect(err => {
+  if (!err) {
+        console.log("Connected to MongoDB")
+  } else {
+        console.log(err)
+  }
+});
+
+const urlCollection = client.db("prod").collection("urlCollection");
 
 const app = express();
 app.set("view engine", "ejs");
