@@ -1,6 +1,6 @@
 const urlForm = document.querySelector("form");
 
-const toggleLoadState = (element, value="Please wait...") => {
+const toggleLoadState = (element, value = "Please wait...") => {
     element.innerText = value;
     element.setAttribute("aria-busy", !element.getAttribute("aria-busy"));
 }
@@ -16,9 +16,9 @@ urlForm.onsubmit = async (event) => {
     const response = await fetch('/createUrl', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify({'url': urlInput.value})
+        body: JSON.stringify({ 'url': urlInput.value })
     });
 
     urlInput.setAttribute("aria-invalid", !response.ok);
