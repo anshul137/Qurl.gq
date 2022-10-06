@@ -12,6 +12,7 @@ client.connect(err => {
         console.log("Connected to MongoDB")
     } else {
         console.log(err)
+        process.exit(1)
     }
 });
 
