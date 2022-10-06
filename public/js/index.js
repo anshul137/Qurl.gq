@@ -21,12 +21,15 @@ urlForm.onsubmit = async (event) => {
         body: JSON.stringify({ 'url': urlInput.value })
     });
 
-    urlInput.setAttribute("aria-invalid", !response.ok);
-
     toggleLoadState(submitButton, "Shorten URL");
 
     if (response.ok) {
         const { shortUrl } = await response.json();
         window.location.href = `${shortUrl}/info`;
+    } 
+    else {
+        const { errors } = await response.json();
+        urlInput.setAttribute("aria-invalid", true);
+        urlInput.setAttribute("data-tooltip", errors[0]);
     }
 };
