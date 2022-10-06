@@ -31,5 +31,8 @@ urlForm.onsubmit = async (event) => {
         const { errors } = await response.json();
         urlInput.setAttribute("aria-invalid", true);
         submitButton.setAttribute("data-tooltip", errors[0]);
+        setTimeout(() => {
+            submitButton.removeAttribute("data-tooltip");
+        }, 1000);
     }
 };
