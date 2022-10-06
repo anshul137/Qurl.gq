@@ -1,6 +1,6 @@
 # What's this?
 
-[qurl.gq](https://qurl.gq) is an open-source URL Shortener written in Node.js 🔗 
+[Qurl.gq](https://qurl.gq) is an open-source URL Shortener written in Node.js 🔗 
 
 # Screenshots
 
