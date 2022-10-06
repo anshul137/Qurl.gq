@@ -12,7 +12,7 @@
   <img width="1434" alt="Screen Shot 2022-10-06 at 1 01 15 PM" src="https://user-images.githubusercontent.com/76220359/194374986-a71ef6c6-42c7-466e-aab7-ee658c97d462.png">
 </a>
 
-# Setup
+# Development
 
 Clone the repo
 ```bash
@@ -20,7 +20,7 @@ git clone https://github.com/TheRedstoneRadiant/Qurl.gq
 cd Qurl.gq
 ```
 
-Copy .env.example and replace variables
+Copy .env.example and replace MongoDB URI
 ```bash
 cp .env.example .env
 nano .env
@@ -36,3 +36,9 @@ Start development server
 npm run dev
 ````
 
+# Tech Stack
+Webserver: [Express.js](https://expressjs.com)
+
+Database: [MongoDB](https://www.mongodb.com)
+
+CSS Library: [PicoCSS](https://picocss.com)
