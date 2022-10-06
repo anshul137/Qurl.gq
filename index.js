@@ -25,6 +25,9 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(require("./router"));
 
-app.listen(8080, () => {
-    console.log("Listening on port 8080\nhttp://localhost:8080");
+const WEB_URL = process.env.WEB_URL || "localhost";
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, WEB_URL, () => {
+    console.log(`Listening on port 8080\nhttp://${WEB_URL}:8080`);
 });
