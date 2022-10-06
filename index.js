@@ -5,14 +5,19 @@ if (process.env["DEV"]) {
 const express = require("express");
 const { MongoClient } = require('mongodb');
 
+if(!process.env["MONGO_URI"]){
+    console.log("Please provide a MONGO_URI environment variable");
+    process.exit(1);
+}
+
 const client = new MongoClient(process.env["MONGO_URI"], { useNewUrlParser: true, useUnifiedTopology: true });
 
 client.connect(err => {
     if (!err) {
-        console.log("Connected to MongoDB")
+        console.log("Connected to MongoDB");
     } else {
-        console.log(err)
-        process.exit(1)
+        console.log(err);
+        process.exit(1);
     }
 });
 
