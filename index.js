@@ -29,5 +29,5 @@ const WEB_URL = process.env.WEB_URL || "localhost";
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, WEB_URL, () => {
-    console.log(`Listening on port 8080\nhttp://${WEB_URL}:8080`);
+    console.log(`Listening on port ${PORT}\nhttp://${WEB_URL}:${PORT}`);
 });
