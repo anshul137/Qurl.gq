@@ -1,3 +1,4 @@
+const axios = require("axios");
 const { Router } = require("express");
 const { urlCollection } = require("../");
 
@@ -17,17 +18,25 @@ router.get('/:shortUrl*', async (req, res, next) => {
     next();
 });
 
-router.get('/:shortUrl', (req, res, next) => {
+router.get('/:shortUrl', async (req, res, next) => {
     if (!req.shortenedUrl) {
         return next();
     };
+
+    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+    let location;
+
+    await axios.get(`https://ipapi.co/${ip}/json/`)
+        .then((response) => location = `${response.data.city}, ${response.data.region}, ${response.data.country_name}`)
+        .catch((error) => true);
 
     res.redirect(req.shortenedUrl.destination);
 
     urlCollection.updateOne({
         shortUrl: req.shortenedUrl.shortUrl
     }, {
-        $inc: { redirects: 1 }
+        $inc: { redirects: 1 },
+        $push: { ips: { ip: ip ? ip : "", location: location, time: Date.now() } }
     })
 });
 

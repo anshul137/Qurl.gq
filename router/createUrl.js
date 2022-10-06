@@ -39,15 +39,27 @@ router.post("/", async (req, res, next) => {
 });
 
 router.post("/", async (req, res) => {
-    const shortUrl = Math.random().toString(36).substr(2, 5);
 
-    await urlCollection.insertOne({
-        shortUrl,
-        destination: req.body.url,
-        redirects: 0
-    });
+    const chooseUrl = async () => {
+        const shortUrl = Math.random().toString(36).substring(2, 7);
 
-    return res.json({ shortUrl });
+        if (await urlCollection.findOne({ shortUrl: shortUrl })) {
+            chooseUrl(); // prevent duplicates
+        }
+
+        await urlCollection.insertOne({
+            shortUrl,
+            destination: req.body.url,
+            redirects: 0,
+            ips: []
+        });
+
+        return shortUrl
+    }
+
+    const url = await chooseUrl();
+
+    return res.json({ shortUrl: url });
 });
 
 module.exports = router;
