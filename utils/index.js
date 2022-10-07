@@ -12,16 +12,16 @@ const isValidHttpUrl = (string) => {
     return url.protocol === "http:" || url.protocol === "https:";
 }
 
-const generateUrl = async () => {
+const generateUrl = async (destination) => {
     const shortUrl = Math.random().toString(36).substring(2, 7);
 
     if (await urlCollection.findOne({ shortUrl: shortUrl })) {
-        return generateUrl(); // prevent duplicates
+        return generateUrl(destination); // prevent duplicates
     }
 
     await urlCollection.insertOne({
         shortUrl,
-        destination: req.body.url,
+        destination: destination,
         redirects: 0,
         ips: []
     });

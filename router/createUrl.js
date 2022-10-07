@@ -39,7 +39,7 @@ router.post("/", async (req, res, next) => {
 });
 
 router.post("/", async (req, res) => {
-    const url = await generateUrl();
+    const url = await generateUrl(req.body.url);
 
     return res.json({ shortUrl: url });
 });
