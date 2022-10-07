@@ -16,7 +16,7 @@ const generateShortUrl = async () => {
     const shortUrl = Math.random().toString(36).substring(2, 7);
 
     // prevent duplicates
-    if (await urlCollection.findOne({ shortUrl: shortUrl })) {
+    if (await urlCollection.findOne({ shortUrl })) {
         return await generateShortUrl();
     }
 
