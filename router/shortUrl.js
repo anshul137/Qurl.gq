@@ -10,7 +10,7 @@ router.get('/:shortUrl*', async (req, res, next) => {
     });
 
     if (!shortenedUrl) {
-        return next();
+        return next();  // 404
     };
 
     req.shortenedUrl = shortenedUrl;
@@ -20,7 +20,7 @@ router.get('/:shortUrl*', async (req, res, next) => {
 
 router.get('/:shortUrl', async (req, res, next) => {
     if (!req.shortenedUrl) {
-        return next();
+        return next();  // 404
     };
 
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
@@ -42,7 +42,7 @@ router.get('/:shortUrl', async (req, res, next) => {
 
 router.get('/:shortUrl/info', async (req, res, next) => {
     if (!req.shortenedUrl) {
-        return next();
+        return next();  // 404
     };
 
     return res.render("info", { ...req.shortenedUrl });
