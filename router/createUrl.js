@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { urlCollection } = require("../");
-const { isValidHttpUrl, chooseUrl } = require("../utils");
+const { isValidHttpUrl, generateUrl } = require("../utils");
 
 const router = Router();
 
@@ -39,7 +39,7 @@ router.post("/", async (req, res, next) => {
 });
 
 router.post("/", async (req, res) => {
-    const url = await chooseUrl();
+    const url = await generateUrl();
 
     return res.json({ shortUrl: url });
 });

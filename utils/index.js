@@ -10,11 +10,11 @@ function isValidHttpUrl(string) {
     return url.protocol === "http:" || url.protocol === "https:";
 }
 
-const chooseUrl = async () => {
+const generateUrl = async () => {
         const shortUrl = Math.random().toString(36).substring(2, 7);
 
         if (await urlCollection.findOne({ shortUrl: shortUrl })) {
-            return chooseUrl(); // prevent duplicates
+            return generateUrl(); // prevent duplicates
         }
 
         await urlCollection.insertOne({
@@ -27,4 +27,4 @@ const chooseUrl = async () => {
         return shortUrl
     }
 
-module.exports = { isValidHttpUrl, chooseUrl }
+module.exports = { isValidHttpUrl, generateUrl }
