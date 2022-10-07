@@ -1,17 +1,14 @@
 const urlForm = document.querySelector("form");
 
-const toggleLoadState = (element, value = "Please wait...") => {
-    element.innerText = value;
-    element.setAttribute("aria-busy", !element.getAttribute("aria-busy") === "true");
-}
-
 urlForm.onsubmit = async (event) => {
     event.preventDefault();
 
     const urlInput = event.target.elements.urlInput;
     const submitButton = event.target.elements.submitButton;
 
-    toggleLoadState(submitButton);
+    submitButton.innerText = "Please wait...";
+    submitButton.removeAttribute("data-tooltip");
+    submitButton.setAttribute("aria-busy", true);
 
     const response = await fetch('/createUrl', {
         method: 'POST',
@@ -21,7 +18,8 @@ urlForm.onsubmit = async (event) => {
         body: JSON.stringify({ 'url': urlInput.value })
     });
 
-    toggleLoadState(submitButton, "Shorten URL");
+    submitButton.innerText = "Shorten URL";
+    submitButton.removeAttribute("aria-busy");
 
     if (response.ok) {
         const { shortUrl } = await response.json();
