@@ -14,8 +14,6 @@ router.post("/", (req, res, next) => {
         })
     }
 
-
-    console.log(typeof req.body.logIps)
     if (typeof req.body.logIps !== "boolean"){
         res.status(400);
         return res.json({
