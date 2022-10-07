@@ -26,9 +26,10 @@ router.get('/:shortUrl', async (req, res, next) => {
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
     let location;
 
-    await axios.get(`https://ipapi.co/${ip}/json/`)
-        .then((response) => location = `${response.data.city}, ${response.data.region}, ${response.data.country_name}`)
-        .catch((error) => true);
+    try {
+        const response = await axios.get(`https://ipapi.co/${ip}/json/`);
+        location = `${response.data.city}, ${response.data.region}, ${response.data.country_name}`;
+    } catch {}
 
     res.redirect(req.shortenedUrl.destination);
 
@@ -36,7 +37,7 @@ router.get('/:shortUrl', async (req, res, next) => {
         shortUrl: req.shortenedUrl.shortUrl
     }, {
         $inc: { redirects: 1 },
-        $push: { ipAddresses: { ip: ip ? ip : "", location: location, time: Date.now() } }
+        $push: { ipAddresses: { ip, location, time: Date.now() } }
     })
 });
 
