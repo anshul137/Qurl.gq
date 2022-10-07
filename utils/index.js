@@ -16,17 +16,17 @@ const generateUrl = async (destination) => {
     const shortUrl = Math.random().toString(36).substring(2, 7);
 
     if (await urlCollection.findOne({ shortUrl: shortUrl })) {
-        return generateUrl(destination); // prevent duplicates
+        return await generateUrl(destination); // prevent duplicates
     }
 
     await urlCollection.insertOne({
         shortUrl,
-        destination: destination,
+        destination,
         redirects: 0,
-        ips: []
+        visitors: []
     });
 
-    return shortUrl
+    return shortUrl;
 }
 
 module.exports = { isValidHttpUrl, generateUrl }
