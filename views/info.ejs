@@ -65,16 +65,16 @@
         </tr>
       </thead>
       <tbody>
-        <% for(let i = 0; i < visitors.length; i++) { %>
+        <% for(let visitor of visitors) { %>
           <tr>
             <td>
-              <%= visitors[i].ip %>
+              <%= visitor.ip %>
             </td>
             <td>
-              <%= visitors[i].location %>
+              <%= visitor.location %>
             </td>
             <td>
-              <%= new Date(visitors[i].time).toLocaleString("en-GB") %>
+              <%= new Date(visitor.time).toLocaleString("en-GB") %>
             </td>
           </tr>
           <% } %>
