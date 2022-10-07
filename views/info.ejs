@@ -22,9 +22,9 @@
     <nav aria-label="breadcrumb">
       <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/<%= shortUrl %>">
-            <%= shortUrl %>
-          </a></li>
+        <li>
+          <a href="/<%= shortUrl %>"><%= shortUrl %></a>
+        </li>
         <li>Info</li>
       </ul>
     </nav>
@@ -35,15 +35,16 @@
       <thead>
         <tr>
           <th>Shortened URL:</th>
-          <th><a href="/<%= shortUrl %>">https://qurl.gq/<%= shortUrl %></a></th>
+          <th>
+            <a href="/<%= shortUrl %>">https://qurl.gq/<%= shortUrl %></a>
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <th>Destination:</th>
-          <td><a href="<%= destination %>">
-              <%= destination %>
-            </a></th>
+          <td>
+            <a href="<%= destination %>"><%= destination %></a>
           </td>
         </tr>
       </tbody>
@@ -65,7 +66,7 @@
         </tr>
       </thead>
       <tbody>
-        <% for(let visitor of visitors) { %>
+        <% for (const visitor of visitors) { %>
           <tr>
             <td>
               <%= visitor.ip %>
@@ -85,7 +86,9 @@
   <footer>
     <nav>
       <ul>
-        <li><a href="https://github.com/TheRedstoneRadiant/Qurl.gq">Github</a></li>
+        <li>
+          <a href="https://github.com/TheRedstoneRadiant/Qurl.gq">Github</a>
+        </li>
       </ul>
       <ul>
         <li>
