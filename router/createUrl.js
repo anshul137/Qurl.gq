@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { urlCollection } = require("../");
-const { isValidHttpUrl } = require("../utils");
+const { isValidHttpUrl, chooseUrl } = require("../utils");
 
 const router = Router();
 
@@ -39,24 +39,6 @@ router.post("/", async (req, res, next) => {
 });
 
 router.post("/", async (req, res) => {
-
-    const chooseUrl = async () => {
-        const shortUrl = Math.random().toString(36).substring(2, 7);
-
-        if (await urlCollection.findOne({ shortUrl: shortUrl })) {
-            chooseUrl(); // prevent duplicates
-        }
-
-        await urlCollection.insertOne({
-            shortUrl,
-            destination: req.body.url,
-            redirects: 0,
-            ips: []
-        });
-
-        return shortUrl
-    }
-
     const url = await chooseUrl();
 
     return res.json({ shortUrl: url });
