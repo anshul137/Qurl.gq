@@ -14,7 +14,7 @@ const chooseUrl = async () => {
         const shortUrl = Math.random().toString(36).substring(2, 7);
 
         if (await urlCollection.findOne({ shortUrl: shortUrl })) {
-            chooseUrl(); // prevent duplicates
+            return chooseUrl(); // prevent duplicates
         }
 
         await urlCollection.insertOne({
