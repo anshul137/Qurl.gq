@@ -2,7 +2,7 @@ const urlForm = document.querySelector("form");
 
 const toggleLoadState = (element, value = "Please wait...") => {
     element.innerText = value;
-    element.setAttribute("aria-busy", !element.getAttribute("aria-busy"));
+    element.setAttribute("aria-busy", !element.getAttribute("aria-busy") === "true");
 }
 
 urlForm.onsubmit = async (event) => {
