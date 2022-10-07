@@ -37,8 +37,19 @@ router.get('/:shortUrl', async (req, res, next) => {
         shortUrl: req.shortenedUrl.shortUrl
     }, {
         $inc: { redirects: 1 },
-        $push: { visitors: { ipAddress, location, time: Date.now() } }
     })
+
+
+    const data = await urlCollection.findOne({ shortUrl: req.shortenedUrl.shortUrl })
+
+    if (data.logIps) {
+        urlCollection.updateOne({
+            shortUrl: req.shortenedUrl.shortUrl
+        }, {
+            $push: { visitors: { ipAddress, location, time: Date.now() } }
+        })
+    }
+
 });
 
 router.get('/:shortUrl/info', async (req, res, next) => {

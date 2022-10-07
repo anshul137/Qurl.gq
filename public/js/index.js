@@ -4,6 +4,7 @@ urlForm.onsubmit = async (event) => {
     event.preventDefault();
 
     const urlInput = event.target.elements.urlInput;
+    const logIps = event.target.elements.logIps;
     const submitButton = event.target.elements.submitButton;
 
     submitButton.innerText = "Please wait...";
@@ -15,7 +16,7 @@ urlForm.onsubmit = async (event) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ 'url': urlInput.value })
+        body: JSON.stringify({ 'url': urlInput.value, 'logIps': logIps.checked })
     });
 
     submitButton.innerText = "Shorten URL";

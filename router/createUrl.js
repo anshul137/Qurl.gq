@@ -14,6 +14,17 @@ router.post("/", (req, res, next) => {
         })
     }
 
+
+    console.log(typeof req.body.logIps)
+    if (typeof req.body.logIps !== "boolean"){
+        res.status(400);
+        return res.json({
+            "errors": [
+                "You must choose whether to log IP addresses or not."
+            ]
+        })
+    }
+
     if (!isValidHttpUrl(req.body.url)) {
         res.status(400);
         return res.json({
@@ -33,6 +44,7 @@ router.post("/", async (req, res) => {
         shortUrl,
         destination: req.body.url,
         redirects: 0,
+        logIps: req.body.logIps,
         visitors: []
     });
 
