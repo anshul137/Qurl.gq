@@ -36,7 +36,7 @@ router.get('/:shortUrl', async (req, res, next) => {
         shortUrl: req.shortenedUrl.shortUrl
     }, {
         $inc: { redirects: 1 },
-        $push: { ips: { ip: ip ? ip : "", location: location, time: Date.now() } }
+        $push: { ipAddresses: { ip: ip ? ip : "", location: location, time: Date.now() } }
     })
 });
 
