@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
 });
 
 router.use((req, res) => {
-  res.render("404");
+  res.status(404).render("404");
 });
 
 module.exports = router;
