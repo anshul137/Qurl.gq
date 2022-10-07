@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { urlCollection } = require("../");
-const { isValidHttpUrl, generateUrl } = require("../utils");
+const { isValidHttpUrl, generateShortUrl } = require("../utils");
 
 const router = Router();
 
@@ -39,7 +39,14 @@ router.post("/", async (req, res, next) => {
 });
 
 router.post("/", async (req, res) => {
-    const url = await generateUrl(req.body.url);
+    const shortUrl = await generateShortUrl();
+
+    await urlCollection.insertOne({
+        shortUrl,
+        destination: req.body.url,
+        redirects: 0,
+        visitors: []
+    });
 
     return res.json({ shortUrl: url });
 });

@@ -1,5 +1,3 @@
-const { urlCollection } = require("../");
-
 const isValidHttpUrl = (string) => {
     let url;
 
@@ -12,21 +10,15 @@ const isValidHttpUrl = (string) => {
     return url.protocol === "http:" || url.protocol === "https:";
 }
 
-const generateUrl = async (destination) => {
+const generateShortUrl = async () => {
     const shortUrl = Math.random().toString(36).substring(2, 7);
 
+    // prevent duplicates
     if (await urlCollection.findOne({ shortUrl: shortUrl })) {
-        return await generateUrl(destination); // prevent duplicates
+        return await generateShortUrl();
     }
-
-    await urlCollection.insertOne({
-        shortUrl,
-        destination,
-        redirects: 0,
-        visitors: []
-    });
 
     return shortUrl;
 }
 
-module.exports = { isValidHttpUrl, generateUrl }
+module.exports = { isValidHttpUrl, generateShortUrl }
