@@ -10,6 +10,7 @@
 
     <!-- JavaScript -->
     <script src="/js/theme.js" defer></script>
+    <script src="/js/time.js" defer></script>
   </head>
 
   <body class="container">
@@ -73,8 +74,7 @@
               <td>
                 <%= visitor.location %>
               </td>
-              <td>
-                <%= new Date(visitor.time).toLocaleString() %>
+              <td time="<%= visitor.time %>">
               </td>
             </tr>
             <% } %>
