@@ -32,7 +32,7 @@ app.use(express.json());
 app.use(require("./router"));
 
 const WEB_URL = process.env.WEB_URL || "localhost";
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, WEB_URL, () => {
     console.log(`Listening on port ${PORT}\nhttp://${WEB_URL}:${PORT}`);
