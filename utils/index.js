@@ -1,9 +1,11 @@
+const { urlCollection } = require("../");
+
 const isValidHttpUrl = (string) => {
     let url;
 
     try {
         url = new URL(string);
-    } catch (_) {
+    } catch {
         return false;
     }
 
