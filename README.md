@@ -5,7 +5,6 @@
 # Contributing ideas
 - Apply a custom font
 - Add tests
-- Add IP address logging
 - UI Improvements
 - Sanitise user input
 
