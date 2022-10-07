@@ -26,7 +26,7 @@ urlForm.onsubmit = async (event) => {
     if (response.ok) {
         const { shortUrl } = await response.json();
         window.location.href = `${shortUrl}/info`;
-    } 
+    }
     else {
         const { errors } = await response.json();
         urlInput.setAttribute("aria-invalid", true);
