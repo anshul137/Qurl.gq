@@ -23,7 +23,7 @@ router.get('/:shortUrl', async (req, res, next) => {
         return next(); // 404
     };
 
-    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+    const ip = req.header('x-forwarded-for');
     let location;
 
     try {
