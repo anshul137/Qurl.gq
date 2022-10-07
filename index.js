@@ -5,7 +5,7 @@ if (process.env["DEV"]) {
 const express = require("express");
 const { MongoClient } = require('mongodb');
 
-if(!process.env["MONGO_URI"]){
+if (!process.env["MONGO_URI"]) {
     console.log("Please provide a MONGO_URI environment variable");
     process.exit(1);
 }

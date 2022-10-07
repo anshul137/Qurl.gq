@@ -26,18 +26,6 @@ router.post("/", (req, res, next) => {
     next();
 });
 
-router.post("/", async (req, res, next) => {
-    const shortUrl = await urlCollection.findOne({
-        destination: req.body.url
-    });
-
-    if (shortUrl) {
-        return res.json({ shortUrl: shortUrl.shortUrl });
-    }
-
-    next();
-});
-
 router.post("/", async (req, res) => {
     const shortUrl = await generateShortUrl();
 
@@ -48,7 +36,7 @@ router.post("/", async (req, res) => {
         visitors: []
     });
 
-    return res.json({ url: shortUrl });
+    return res.json({ shortUrl });
 });
 
 module.exports = router;
