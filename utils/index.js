@@ -1,3 +1,5 @@
+const { urlCollection } = require("../");
+
 function isValidHttpUrl(string) {
     let url;
 
