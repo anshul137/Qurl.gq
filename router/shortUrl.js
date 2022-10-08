@@ -10,7 +10,7 @@ router.get('/:shortUrl*', async (req, res, next) => {
     });
 
     if (!shortenedUrl) {
-        return next(); // 404
+        return res.redirect("/404");
     };
 
     req.shortenedUrl = shortenedUrl;
@@ -19,23 +19,21 @@ router.get('/:shortUrl*', async (req, res, next) => {
 });
 
 router.get('/:shortUrl', async (req, res, next) => {
-    if (!req.shortenedUrl) {
-        return next(); // 404
-    };
-
-    const ipAddress = req.header('x-forwarded-for');
-    let location;
-
-    try {
-        const response = await axios.get(`https://ipapi.co/${ipAddress}/json/`);
-        location = `${response.data.city}, ${response.data.region}, ${response.data.country_name}`;
-    } catch {}
-
     res.redirect(req.shortenedUrl.destination);
 
     const update = { $inc: { redirects: 1 } };
 
+    // IP address logging
     if (req.shortenedUrl.logIps) {
+        const ipAddress = req.header('x-forwarded-for');
+        
+        let location;
+
+        try {
+            const response = await axios.get(`https://ipapi.co/${ipAddress}/json/`);
+            location = `${response.data.city}, ${response.data.region}, ${response.data.country_name}`;
+        } catch {};
+
         update["$push"] = { visitors: { ipAddress, location, time: Date.now() } };
     }
 
@@ -43,11 +41,7 @@ router.get('/:shortUrl', async (req, res, next) => {
 });
 
 router.get('/:shortUrl/info', async (req, res, next) => {
-    if (!req.shortenedUrl) {
-        return next(); // 404
-    };
-
-    return res.render("info", { ...req.shortenedUrl });
+    res.render("info", { ...req.shortenedUrl });
 });
 
 module.exports = router;

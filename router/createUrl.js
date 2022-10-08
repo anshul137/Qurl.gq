@@ -49,7 +49,7 @@ router.post("/", async (req, res) => {
         visitors: []
     });
 
-    return res.json({ shortUrl });
+    res.json({ shortUrl });
 });
 
 module.exports = router;
