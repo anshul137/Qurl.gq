@@ -40,9 +40,7 @@ router.get('/:shortUrl', async (req, res, next) => {
     })
 
 
-    const data = await urlCollection.findOne({ shortUrl: req.shortenedUrl.shortUrl })
-
-    if (data.logIps) {
+    if (req.shortenedUrl.logIps) {
         urlCollection.updateOne({
             shortUrl: req.shortenedUrl.shortUrl
         }, {
