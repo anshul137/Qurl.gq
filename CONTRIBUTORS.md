@@ -1,4 +1,4 @@
-# Contributers:
+# Contributors:
 
 - [TheRedstoneRadiant](https://github.com/TheRedstoneRadiant)
 - [eesazahed](https://github.com/eesazahed)
