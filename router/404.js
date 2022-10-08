@@ -2,7 +2,7 @@ const { Router } = require("express");
 
 const router = Router();
 
-router.get("/404", (req, res) => {
+router.get("/", (req, res) => {
     res.status(404);
 
     if (req.accepts('html'))
