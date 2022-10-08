@@ -9,7 +9,6 @@ router.get("/", (req, res) => {
     res.render("index");
 });
 
-
 router.use((req, res) => {
   res.redirect("/404");
 });
