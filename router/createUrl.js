@@ -6,30 +6,33 @@ const router = Router();
 
 router.post("/", (req, res, next) => {
     if (!req.body.url) {
-        res.status(400);
-        return res.json({
-            "errors": [
-                "Missing 'url' field in JSON body"
-            ]
-        })
+        return res
+            .status(400)
+            .json({
+                "errors": [
+                    "Missing 'url' field in JSON body."
+                ]
+            });
     }
 
-    if (typeof req.body.logIps !== "boolean"){
-        res.status(400);
-        return res.json({
-            "errors": [
-                "You must choose whether to log IP addresses or not."
-            ]
-        })
+    else if (typeof req.body.logIps !== "boolean") {
+        return res
+            .status(400)
+            .json({
+                "errors": [
+                    "You must choose whether to log IP addresses or not."
+                ]
+            })
     }
 
-    if (!isValidHttpUrl(req.body.url)) {
-        res.status(400);
-        return res.json({
-            "errors": [
-                "Invalid URL."
-            ]
-        })
+    else if (!isValidHttpUrl(req.body.url)) {
+        return res
+            .status(400)
+            .json({
+                "errors": [
+                    "Invalid URL."
+                ]
+            })
     }
 
     next();
