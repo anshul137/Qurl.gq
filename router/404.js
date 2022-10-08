@@ -1,3 +1,5 @@
+const { Router } = require("express");
+
 const router = Router();
 
 router.get("/404", (req, res) => {
