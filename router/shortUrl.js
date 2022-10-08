@@ -33,12 +33,13 @@ router.get('/:shortUrl', async (req, res, next) => {
 
     res.redirect(req.shortenedUrl.destination);
 
-    urlCollection.updateOne({
-        shortUrl: req.shortenedUrl.shortUrl
-    }, {
-        $inc: { redirects: 1 },
-        $push: { visitors: { ipAddress, location, time: Date.now() } }
-    })
+    const update = { $inc: { redirects: 1 } };
+
+    if (req.shortenedUrl.logIps) {
+        update["$push"] = { visitors: { ipAddress, location, time: Date.now() } };
+    }
+
+    urlCollection.updateOne({ shortUrl: req.shortenedUrl.shortUrl }, update);
 });
 
 router.get('/:shortUrl/info', async (req, res, next) => {

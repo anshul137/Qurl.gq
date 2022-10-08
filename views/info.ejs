@@ -32,15 +32,13 @@
 
     <main>
       <table>
-        <thead>
+        <tbody>
           <tr>
             <th>Shortened URL:</th>
             <td>
               <a href="/<%= shortUrl %>">https://qurl.gq/<%= shortUrl %></a>
             </td>
           </tr>
-        </thead>
-        <tbody>
           <tr>
             <th>Destination:</th>
             <td>
@@ -57,29 +55,33 @@
           </tr>
         </tfoot>
       </table>
-      <table>
-        <thead>
-          <tr>
-            <th>IP Address</th>
-            <th>Location</th>
-            <th>Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% for (const visitor of visitors) { %>
+      <% if (logIps) { %>
+        <table>
+          <thead>
             <tr>
-              <td>
-                <%= visitor.ipAddress %>
-              </td>
-              <td>
-                <%= visitor.location %>
-              </td>
-              <td time="<%= visitor.time %>">
-              </td>
+              <th>IP Address</th>
+              <th>Location</th>
+              <th>Time</th>
             </tr>
-            <% } %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% for (const visitor of visitors) { %>
+              <tr>
+                <td>
+                  <%= visitor.ipAddress %>
+                </td>
+                <td>
+                  <%= visitor.location %>
+                </td>
+                <td time="<%= visitor.time %>">
+                </td>
+              </tr>
+              <% } %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <p>This URL does not collect IP addreses.</p>
+      <% } %>
     </main>
 
     <footer>

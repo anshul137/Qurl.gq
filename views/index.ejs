@@ -22,17 +22,25 @@
 
         <main>
             <form>
-                <label for="url">
-                    URL:
-                    <input placeholder="https://duckduckgo.com" type="text" name="urlInput" required>
-                </label>
+                <fieldset>
+                    <label for="url">
+                        URL:
+                        <input placeholder="https://duckduckgo.com" type="text" name="urlInput" required/ >
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <label for="logIps">
+                        Log IP Addresses:
+                        <input type="checkbox" name="logIps" id="logIps" />
+                    </label>
+                </fieldset>
                 <button type="submit" name="submitButton">Shorten URL <i class="arrow fa-solid fa-arrow-right"></i></button>
             </form>
         </main>
 
         <footer>
             <nav>
-                <ul>
+                <ul> 
                     <li><a href="https://github.com/TheRedstoneRadiant/Qurl.gq">Github</a></li>
                 </ul>
                 <ul>
