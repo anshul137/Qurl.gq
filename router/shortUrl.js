@@ -46,7 +46,8 @@ router.get('/:shortUrl/info', async (req, res, next) => {
         })
     })
     req.shortenedUrl.mapToken = process.env.MAP_TOKEN
-    req.shortenedUrl.mapStyle = process.env.MAP_STYLE
+    req.shortenedUrl.mapLightStyle = process.env.MAP_LIGHT_STYLE
+    req.shortenedUrl.mapDarkStyle = process.env.MAP_DARK_STYLE
     res.render("info", { ...req.shortenedUrl });
 });
 

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css'>
 
     <!-- JavaScript -->
-    <script src="/js/theme.js" defer></script>
+    
     <script src="/js/time.js" defer></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
     
@@ -88,7 +88,7 @@
       <% } %>
       <span style="font-size:30px;">Map</span>
       <section class="section-map" style="margin-top: 15px;">
-        <div id="map" data-location="<%= JSON.stringify(locationsLngLat) %>" data-maptoken="<%= mapToken %>" data-mapstyle="<%= mapStyle %>"></div>
+        <div id="map" data-location="<%= JSON.stringify(locationsLngLat) %>" data-maptoken="<%= mapToken %>" data-maplightstyle="<%= mapLightStyle %>" data-mapdarkstyle="<%= mapDarkStyle %>"></div>
       </section>
     </main>
 
@@ -109,6 +109,7 @@
           </ul>
         </nav>
     </footer>
-    <script src="/js/mapbox.js"></script>
+    <!-- <script src="/js/mapbox.js" defer></script> -->
+    <script type="module" src="/js/theme.js" defer></script>
   </body>
 </html>

@@ -1,8 +1,6 @@
-const mapbox = document.getElementById('map')
-const locations = JSON.parse( mapbox.dataset.location)
-const style = mapbox.dataset.mapstyle || 'mapbox://styles/sipun834/cl81vp825007q14pmc4eohld0'
-const displayMap = locations => {
-    mapboxgl.accessToken = mapbox.dataset.maptoken
+
+export const displayMap = (locations,style, accessToken) => {
+    mapboxgl.accessToken = accessToken
     
     var map = new mapboxgl.Map({
         container: 'map',
@@ -41,4 +39,4 @@ const displayMap = locations => {
     })
 }
 
-displayMap(locations)
+// displayMap(locations)
