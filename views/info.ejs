@@ -80,14 +80,14 @@
                 <td time="<%= visitor.time %>">
                 </td>
               </tr>
-              
               <% } %>
           </tbody>
         </table>
       <% } else { %>
         <p>This URL does not collect IP addreses.</p>
       <% } %>
-      <section class="section-map">
+      <span style="font-size:30px;">Map</span>
+      <section class="section-map" style="margin-top: 15px;">
         <div id="map" data-location="<%= JSON.stringify(locationsLngLat) %>" data-maptoken="<%= mapToken %>" data-mapstyle="<%= mapStyle %>"></div>
       </section>
     </main>
