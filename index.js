@@ -5,18 +5,15 @@ if (process.env["DEV"]) {
 const express = require("express");
 const { MongoClient } = require("mongodb");
 
-// if (!process.env["MONGO_URI"]) {
-//   console.log("Please provide a MONGO_URI environment variable");
-//   process.exit(1);
-// }
+if (!process.env["MONGO_URI"]) {
+  console.log("Please provide a MONGO_URI environment variable");
+  process.exit(1);
+}
 
-const client = new MongoClient(
-  "mongodb+srv://hi_:XusSeeAiZPAXfWdy@cluster0.pfhhsq9.mongodb.net/?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+const client = new MongoClient(process.env["MONGO_URI"], {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 client.connect((err) => {
   if (!err) {
