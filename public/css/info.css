@@ -1,24 +1,24 @@
 .section-map {
-    position: relative;
-    height: 30rem;
+  position: relative;
+  height: 30rem;
 }
 
 #map {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    border-radius: 20px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  border-radius: 20px;
 }
-  
+
 .marker {
-    background-image: url('../img/pin.png');
-    background-size: cover;
-    width: 32px;
-    height: 40px;
-    cursor: pointer;
+  background-image: url("../img/pin.png");
+  background-size: cover;
+  width: 32px;
+  height: 40px;
+  cursor: pointer;
 }
 
 .visitors {
-    margin-top: 200px;
+  margin-top: 200px;
 }
