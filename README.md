@@ -2,12 +2,6 @@
 
 [Qurl.gq](https://qurl.gq) is an open-source URL Shortener written in Node.js 🔗 
 
-# Contributing ideas
-- Apply a custom font
-- Add tests
-- UI Improvements
-- Sanitise user input
-
 # Screenshots
 
 <a href="https://qurl.gq">
