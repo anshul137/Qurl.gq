@@ -4,6 +4,7 @@
         
         <!-- CSS -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
         <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
         
@@ -14,10 +15,7 @@
 
     <body class="container">
         <header>
-            <hgroup>
-                <h1>Qurl.gq</h1>
-                <h3>An open-source URL Shortener written in Node.js 🔗</h3>
-            </hgroup>
+            <%- include('partials/header') %>
         </header>
 
         <main>
@@ -28,8 +26,8 @@
                         <input placeholder="https://duckduckgo.com" type="text" name="urlInput" required/ >
                     </label>
                     <label for="logIps">
-                        <input type="checkbox" name="logIps" id="logIps" />
-                        Log IP Addresses
+                        <input type="checkbox" name="logIps" id="logIps" checked />
+                        Collect IP Addresses
                     </label>
                 </fieldset>
 
@@ -37,22 +35,6 @@
             </form>
         </main>
 
-        <footer>
-            <nav>
-                <ul> 
-                    <li>
-                        <a href="https://github.com/TheRedstoneRadiant/Qurl.gq">Github</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/TheRedstoneRadiant/Qurl.gq/contributors">Contributors ❤️</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <a href="javascript:undefined" id="lightbulb"><i class="fa-solid fa-lightbulb"></i></a>
-                    </li>
-                </ul>
-            </nav>
-        </footer>
+        <%- include('partials/footer') %>
     </body>
 </html>

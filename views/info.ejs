@@ -1,24 +1,27 @@
 <html>
   <head>
-    <title>Qurl.gq - <%= shortUrl %>
-    </title>
+    <title>Qurl.gq - <%= shortUrl %></title>
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/info.css">
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
-    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
+    <link rel="stylesheet" href='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css'>
 
     <!-- JavaScript -->
-    <script src="/js/theme.js" defer></script>
+    <script>
+      const visitors = '<%- JSON.stringify(visitors) %>';
+      const mapToken = "<%- mapToken %>";
+    </script>
     <script src="/js/time.js" defer></script>
+    <script src="/js/theme.js" defer></script>
+    <script src="/js/mapbox.js" defer></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
   </head>
 
   <body class="container">
     <header>
-      <hgroup>
-        <h1>Qurl.gq</h1>
-        <h3>An open-source URL Shortener written in Node.js 🔗</h3>
-      </hgroup>
+      <%- include('partials/header') %>
       <nav aria-label="breadcrumb">
         <ul>
           <li><a href="/">Home</a></li>
@@ -32,30 +35,33 @@
 
     <main>
       <table>
-        <tbody>
-          <tr>
-            <th>Shortened URL:</th>
-            <td>
-              <a href="/<%= shortUrl %>">https://qurl.gq/<%= shortUrl %></a>
-            </td>
-          </tr>
-          <tr>
-            <th>Destination:</th>
-            <td>
-              <a href="<%= destination %>"><%= destination %></a>
-            </td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <th>Total Redirects:</th>
-            <td>
-              <%= redirects %>
-            </td>
-          </tr>
-        </tfoot>
+        <tr>
+          <th>Shortened URL:</th>
+          <td>
+            <a href="/<%= shortUrl %>">https://qurl.gq/<%= shortUrl %></a>
+          </td>
+        </tr>
+        <tr>
+          <th>Destination:</th>
+          <td>
+            <a href="<%= destination %>"><%= destination %></a>
+          </td>
+        </tr>
+        <tr>
+          <th>Total Redirects:</th>
+          <td>
+            <%= redirects %>
+          </td>
+        </tr>
       </table>
-      <% if (logIps) { %>
+
+      <% if (!logIps) { %>
+        <p class="visitors">This URL does not collect IP addresses.</p>
+      <% } else if (visitors.length !== 0) { %>
+        <h2 class="visitors">Visitor Map</h2>
+        <section class="section-map" style="margin-top: 15px;">
+          <div id="map"></div>
+        </section>
         <table>
           <thead>
             <tr>
@@ -76,30 +82,12 @@
                 <td time="<%= visitor.time %>">
                 </td>
               </tr>
-              <% } %>
+            <% } %>
           </tbody>
         </table>
-      <% } else { %>
-        <p>This URL does not collect IP addreses.</p>
       <% } %>
     </main>
 
-    <footer>
-        <nav>
-          <ul> 
-            <li>
-                <a href="https://github.com/TheRedstoneRadiant/Qurl.gq">Github</a>
-            </li>
-            <li>
-                <a href="https://github.com/TheRedstoneRadiant/Qurl.gq/contributors">Contributors ❤️</a>
-            </li>
-          </ul>
-          <ul>
-            <li>
-                <a href="javascript:undefined" id="lightbulb"><i class="fa-solid fa-lightbulb"></i></a>
-            </li>
-          </ul>
-        </nav>
-    </footer>
+    <%- include('partials/footer') %>
   </body>
 </html>

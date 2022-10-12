@@ -16,4 +16,8 @@ lightbulb.onclick = (e) => {
 
     window.localStorage.setItem("data-theme", dataTheme);
     document.documentElement.setAttribute("data-theme", dataTheme);
+
+    if (map) {
+        map.setStyle(`mapbox://styles/mapbox/${dataTheme}-v10`);
+    }
 }
