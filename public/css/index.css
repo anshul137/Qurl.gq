@@ -1,0 +1,9 @@
+.arrow {
+    transition: 0.5s all;
+    margin-left: 2px;
+}
+
+button:hover>.arrow {
+    margin-left: 12px;
+}
+

@@ -2,6 +2,7 @@ const axios = require("axios");
 const { Router } = require("express");
 const { urlCollection } = require("../");
 
+const mapToken = process.env.MAPBOX_API_TOKEN;
 const router = Router();
 
 router.get('/:shortUrl*', async (req, res, next) => {
@@ -24,31 +25,30 @@ router.get('/:shortUrl', async (req, res, next) => {
     
     // IP address logging
     if (req.shortenedUrl.logIps) {
-        const ipAddress = (req.headers['x-forwarded-for'] || '').split(',').pop().trim() ; 
-        let location,coordinates;
+        let ipAddress = (req.headers['x-forwarded-for'] || '').split(',').pop().trim(); 
+        let location, coordinates, response;
         try {
-            var response = await axios.get(`https://ipapi.co/${ipAddress}/json/`);
+            response = await axios.get(`https://ipapi.co/${ipAddress}/json`);
             location = `${response.data.city}, ${response.data.region}, ${response.data.country_name}`;
-            coordinates = [response.data.longitude, response.data.latitude]
-        } catch {};
+            coordinates = [response.data.longitude, response.data.latitude];
+            ipAddress = response.data.ip;
+        } catch {}
 
-        update["$push"] = { visitors: { ipAddress: response.data.ip, location, time: Date.now() ,coordinates} };
+        update["$push"] = {
+            visitors: {
+                ipAddress,
+                location,
+                coordinates,
+                time: Date.now()
+            }
+        };
     }
 
     urlCollection.updateOne({ shortUrl: req.shortenedUrl.shortUrl }, update);
 });
 
 router.get('/:shortUrl/info', async (req, res, next) => {
-    req.shortenedUrl.locationsLngLat = []
-    req.shortenedUrl.visitors.forEach( (visit)=>{
-        req.shortenedUrl.locationsLngLat.push({
-            coordinates: visit.coordinates
-        })
-    })
-    req.shortenedUrl.mapToken = process.env.MAP_TOKEN
-    req.shortenedUrl.mapLightStyle = process.env.MAP_LIGHT_STYLE
-    req.shortenedUrl.mapDarkStyle = process.env.MAP_DARK_STYLE
-    res.render("info", { ...req.shortenedUrl });
+    res.render("info", { ...req.shortenedUrl, mapToken });
 });
 
 module.exports = router;

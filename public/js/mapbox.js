@@ -1,42 +1,39 @@
+let map;
 
-export const displayMap = (locations,style, accessToken) => {
-    mapboxgl.accessToken = accessToken
-    
-    var map = new mapboxgl.Map({
+if (visitors.length !== 0) {
+    mapboxgl.accessToken = mapToken;
+
+    map = new mapboxgl.Map({
         container: 'map',
-        style // this is the link from the mapbox studio
-        
-    } );
-
-    const bounds = new mapboxgl.LngLatBounds(); // bounds are used for fitting the map to certain location
-
-    locations.forEach(loc => {
-        //create a new element with class name marker
-        const el = document.createElement('div')
-        el.className = 'marker'
-
-        // add above as Marker
-        new mapboxgl.Marker( {
-            element: el,
-            anchor: 'bottom'
-        }).setLngLat(loc.coordinates).addTo(map)
-
-        
-        // add the loc to the bounds
-        //extends the map bounds to include current location
-        bounds.extend(loc.coordinates )
+        style: `mapbox://styles/mapbox/${dataTheme}-v10`
     });
+
+    const bounds = new mapboxgl.LngLatBounds();  // create map bounds
+
+    for (const visitor of JSON.parse(visitors)) {
+        // create an empty marker element
+        const element = document.createElement('div')
+        element.className = 'marker'
+
+        // create and apply marker object
+        new mapboxgl.Marker({
+                element
+            })
+            .setLngLat(visitor.coordinates)
+            .addTo(map);
+
+        // extends the map bounds to include coordinates
+        bounds.extend(visitor.coordinates);
+    };
 
     /// zoom out /in feature editing and actaully exexute the options made
     // above
-    map.fitBounds(bounds , {
+    map.fitBounds(bounds, {
         padding: {
             top: 200,
             bottom: 150,
             left: 100,
             right: 100
         }
-    })
+    });
 }
-
-// displayMap(locations)
