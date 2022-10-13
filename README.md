@@ -5,11 +5,15 @@
 # Screenshots
 
 <a href="https://qurl.gq">
-  <img width="1434" alt="Screen Shot 2022-10-06 at 1 00 44 PM" src="https://user-images.githubusercontent.com/76220359/194374946-3312cbd2-0380-41bb-9701-58432c961696.png">
+  <img height="400" alt="Homepage" src="https://user-images.githubusercontent.com/97064249/195446316-9442778e-7aa5-4c96-b051-202a58442881.png">
 </a>
 
-<a href="https://qurl.gq/658ys/info">
-  <img width="1434" alt="Screen Shot 2022-10-06 at 1 01 15 PM" src="https://user-images.githubusercontent.com/76220359/194374986-a71ef6c6-42c7-466e-aab7-ee658c97d462.png">
+<a href="https://qurl.gq/glnh4/info">
+  <img height="400" alt="Info Page" src="https://user-images.githubusercontent.com/97064249/195446416-aec6fdbb-4cb9-4500-babb-771c3818181d.png">
+</a>
+
+<a href="https://qurl.gq/glnh4/info">
+  <img height="400" alt="Map" src="https://user-images.githubusercontent.com/97064249/195446479-f638ece3-b796-4c29-9d8a-320ad369fc33.png">
 </a>
 
 # Development
