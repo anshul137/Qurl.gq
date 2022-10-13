@@ -1,53 +1,39 @@
 const { Router } = require("express");
 const { urlCollection } = require("../");
-const { isValidHttpUrl } = require("../utils");
+const { isValidHttpUrl, generateShortUrl } = require("../utils");
 
 const router = Router();
 
 router.post("/", (req, res, next) => {
-    if (!req.body.url) {
-        res.status(400);
-        return res.json({
-            "errors": [
-                "Missing 'url' field in JSON body"
-            ]
-        })
-    }
-
-    if (!isValidHttpUrl(req.body.url)) {
-        res.status(400);
-        return res.json({
-            "errors": [
-                "Invalid URL."
-            ]
-        })
-    }
-
-    next();
-});
-
-router.post("/", async (req, res, next) => {
-    const shortUrl = await urlCollection.findOne({
-        destination: req.body.url
+  if (!req.body.url) {
+    return res.status(400).json({
+      errors: ["Missing 'url' field in JSON body."],
     });
+  } else if (typeof req.body.logIps !== "boolean") {
+    return res.status(400).json({
+      errors: ["You must choose whether to log IP addresses or not."],
+    });
+  } else if (!isValidHttpUrl(req.body.url)) {
+    return res.status(400).json({
+      errors: ["Invalid URL."],
+    });
+  }
 
-    if (shortUrl) {
-        return res.json({ shortUrl: shortUrl.shortUrl });
-    }
-
-    next();
+  next();
 });
 
 router.post("/", async (req, res) => {
-    const shortUrl = Math.random().toString(36).substr(2, 5);
+  const shortUrl = await generateShortUrl();
 
-    await urlCollection.insertOne({
-        shortUrl,
-        destination: req.body.url,
-        redirects: 0
-    });
+  await urlCollection.insertOne({
+    shortUrl,
+    destination: req.body.url,
+    redirects: 0,
+    logIps: req.body.logIps,
+    visitors: [],
+  });
 
-    return res.json({ shortUrl });
+  res.json({ shortUrl });
 });
 
 module.exports = router;

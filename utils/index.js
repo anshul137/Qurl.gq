@@ -1,13 +1,26 @@
-function isValidHttpUrl(string) {
-    let url;
+const { urlCollection } = require("../");
 
-    try {
-        url = new URL(string);
-    } catch (_) {
-        return false;
-    }
+const isValidHttpUrl = (string) => {
+  let url;
 
-    return url.protocol === "http:" || url.protocol === "https:";
-}
+  try {
+    url = new URL(string);
+  } catch {
+    return false;
+  }
 
-module.exports = { isValidHttpUrl }
+  return url.protocol === "http:" || url.protocol === "https:";
+};
+
+const generateShortUrl = async () => {
+  const shortUrl = Math.random().toString(36).substring(2, 7);
+
+  // prevent duplicates
+  if (await urlCollection.findOne({ shortUrl })) {
+    return await generateShortUrl();
+  }
+
+  return shortUrl;
+};
+
+module.exports = { isValidHttpUrl, generateShortUrl };

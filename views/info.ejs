@@ -1,64 +1,92 @@
 <html>
-    <head>
-        <title>Qurl.gq - <%= shortUrl %></title>
-        
-        <!-- CSS -->
-        <link rel="stylesheet" type="text/css" href="/css/style.css">
-        <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
-        <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
+  <head>
+    <title>Qurl.gq - <%= shortUrl %></title>
 
-        <!-- JavaScript -->
-        <script src="/js/theme.js" defer></script>
-    </head>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/info.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css"
+    />
 
-    <body class="container">
-        <header>
-            <hgroup>
-                <h1>Qurl.gq</h1>
-                <h3>An open-source URL Shortener written in Node.js 🔗</h3>
-            </hgroup>
-            <nav aria-label="breadcrumb">
-              <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/<%= shortUrl %>"><%= shortUrl %></a></li>
-                <li>Info</li>
-              </ul>
-            </nav>
-        </header>
+    <!-- JavaScript -->
+    <script>
+      const visitors = '<%- JSON.stringify(visitors) %>';  // use single quotes
+      const mapToken = "<%- mapToken %>";
+    </script>
+    <script src="/js/time.js" defer></script>
+    <script src="/js/theme.js" defer></script>
+    <script src="/js/mapbox.js" defer></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+  </head>
 
-        <main>
-            <table>
-              <thead>
-                <tr>
-                  <th>Shortened URL:</th>
-                  <th><a href="/<%= shortUrl %>">https://qurl.gq/<%= shortUrl %></a></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th>Destination:</th>
-                  <td><a href="<%= destination %>"><%= destination %></a></th></td>
-                </tr>
-              <tfoot>
-                <tr>
-                  <th>Total Redirects:</th>
-                  <td><%= redirects %></td>
-                </tr>
-              </tfoot>
-            </table>
-        </main>
+  <body class="container">
+    <header>
+      <%- include('partials/header') %>
+      <nav aria-label="breadcrumb">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li>
+            <a href="/<%= shortUrl %>"><%= shortUrl %></a>
+          </li>
+          <li>Info</li>
+        </ul>
+      </nav>
+    </header>
 
-        <footer>
-            <nav>
-                <ul>
-                    <li><a href="https://github.com/TheRedstoneRadiant/Qurl.gq">Github</a></li>
-                </ul>
-                <ul>
-                    <li>
-                        <a href="javascript:undefined" id="lightbulb"><i class="fa-solid fa-lightbulb"></i></a>
-                    </li>
-                </ul>
-            </nav>
-        </footer>
-    </body>
+    <main>
+      <table>
+        <tr>
+          <th>Shortened URL:</th>
+          <td>
+            <a href="/<%= shortUrl %>">https://qurl.gq/<%= shortUrl %></a>
+          </td>
+        </tr>
+        <tr>
+          <th>Destination:</th>
+          <td>
+            <a href="<%= destination %>"><%= destination %></a>
+          </td>
+        </tr>
+        <tr>
+          <th>Total Redirects:</th>
+          <td><%= redirects %></td>
+        </tr>
+      </table>
+
+      <% if (!logIps) { %>
+      <p class="visitors">This URL does not collect IP addresses.</p>
+      <% } else if (visitors.length !== 0) { %>
+      <h2 class="visitors">Visitor Map</h2>
+      <section class="section-map" style="margin-top: 15px">
+        <div id="map"></div>
+      </section>
+      <table>
+        <thead>
+          <tr>
+            <th>IP Address</th>
+            <th>Location</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (const visitor of visitors) { %>
+          <tr>
+            <td><%= visitor.ipAddress %></td>
+            <td><%= visitor.location %></td>
+            <td time="<%= visitor.time %>"></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <% } %>
+    </main>
+
+    <%- include('partials/footer') %>
+  </body>
 </html>

@@ -1,35 +1,33 @@
 const urlForm = document.querySelector("form");
 
-const toggleLoadState = (element, value = "Please wait...") => {
-    element.innerText = value;
-    element.setAttribute("aria-busy", !element.getAttribute("aria-busy"));
-}
-
 urlForm.onsubmit = async (event) => {
-    event.preventDefault();
+  event.preventDefault();
 
-    const urlInput = event.target.elements.urlInput;
-    const submitButton = event.target.elements.submitButton;
+  const urlInput = event.target.elements.urlInput;
+  const logIps = event.target.elements.logIps;
+  const submitButton = event.target.elements.submitButton;
 
-    toggleLoadState(submitButton);
+  submitButton.innerText = "Please wait...";
+  submitButton.removeAttribute("data-tooltip");
+  submitButton.setAttribute("aria-busy", true);
 
-    const response = await fetch('/createUrl', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ 'url': urlInput.value })
-    });
+  const response = await fetch("/createUrl", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ url: urlInput.value, logIps: logIps.checked }),
+  });
 
-    toggleLoadState(submitButton, "Shorten URL");
+  submitButton.innerText = "Shorten URL";
+  submitButton.removeAttribute("aria-busy");
 
-    if (response.ok) {
-        const { shortUrl } = await response.json();
-        window.location.href = `${shortUrl}/info`;
-    } 
-    else {
-        const { errors } = await response.json();
-        urlInput.setAttribute("aria-invalid", true);
-        submitButton.setAttribute("data-tooltip", errors[0]);
-    }
+  if (response.ok) {
+    const { shortUrl } = await response.json();
+    window.location.href = `${shortUrl}/info`;
+  } else {
+    const { errors } = await response.json();
+    urlInput.setAttribute("aria-invalid", true);
+    submitButton.setAttribute("data-tooltip", errors[0]);
+  }
 };
