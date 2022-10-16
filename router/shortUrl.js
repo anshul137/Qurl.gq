@@ -1,32 +1,32 @@
-const axios = require("axios");
-const { Router } = require("express");
-const { urlCollection } = require("../");
+const axios = require('axios');
+const { Router } = require('express');
+const { urlCollection } = require('../');
 
 const mapToken = process.env.MAPBOX_API_TOKEN;
 const router = Router();
 
-router.get("/:shortUrl*", async (req, res, next) => {
+router.get('/:shortUrl*', async (req, res, next) => {
   const shortenedUrl = await urlCollection.findOne({
     shortUrl: req.params.shortUrl,
   });
 
   if (!shortenedUrl) {
-    return res.redirect("/404");
+    return res.redirect('/404');
   }
 
   req.shortenedUrl = shortenedUrl;
   next();
 });
 
-router.get("/:shortUrl", async (req, res, next) => {
+router.get('/:shortUrl', async (req, res, next) => {
   res.redirect(req.shortenedUrl.destination);
 
   const update = { $inc: { redirects: 1 } };
 
   // IP address logging
   if (req.shortenedUrl.logIps) {
-    let ipAddress =
-      req.socket.remoteAddress || req.headers["x-forwarded-for"] || "";
+    console.log(req.headers)
+    let ipAddress = req.header('x-forwarded-for');
 
     let location, coordinates, response;
 
@@ -37,7 +37,7 @@ router.get("/:shortUrl", async (req, res, next) => {
       ipAddress = response.data.ip;
     } catch {}
 
-    update["$push"] = {
+    update['$push'] = {
       visitors: {
         ipAddress,
         location,
@@ -50,8 +50,8 @@ router.get("/:shortUrl", async (req, res, next) => {
   urlCollection.updateOne({ shortUrl: req.shortenedUrl.shortUrl }, update);
 });
 
-router.get("/:shortUrl/info", async (req, res, next) => {
-  res.render("info", { ...req.shortenedUrl, mapToken });
+router.get('/:shortUrl/info', async (req, res, next) => {
+  res.render('info', { ...req.shortenedUrl, mapToken });
 });
 
 module.exports = router;
