@@ -25,7 +25,8 @@ router.get('/:shortUrl', async (req, res, next) => {
 
   // IP address logging
   if (req.shortenedUrl.logIps) {
-    let ipAddress = req.socket.remoteAddress || req.headers['x-forwarded-for'] || '';
+    console.log(req.headers)
+    let ipAddress = req.header('x-forwarded-for');
 
     let location, coordinates, response;
 
