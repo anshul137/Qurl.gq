@@ -1,6 +1,6 @@
 # What's this?
 
-[Qurl.gq](https://qurl.gq) is an open-source URL Shortener written in Node.js 🔗 
+[Qurl.gq](https://qurl.gq) is an open-source URL Shortener written in Node.js 🔗
 
 # Screenshots
 
@@ -19,28 +19,33 @@
 # Development
 
 Clone the repo
+
 ```bash
 git clone https://github.com/TheRedstoneRadiant/Qurl.gq
 cd Qurl.gq
 ```
 
 Copy .env.example and replace MongoDB URI
+
 ```bash
 cp .env.example .env
 nano .env
 ```
 
 Install dependencies
+
 ```bash
 npm install
 ```
 
 Start development server
+
 ```bash
 npm run dev
-````
+```
 
 # Tech Stack
+
 Webserver: [Express.js](https://expressjs.com)
 
 Database: [MongoDB](https://www.mongodb.com)
