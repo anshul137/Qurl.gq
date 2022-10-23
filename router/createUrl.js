@@ -9,11 +9,15 @@ router.post('/', (req, res, next) => {
     return res.status(400).json({
       errors: ["Missing 'url' field in JSON body."],
     });
-  } else if (typeof req.body.logIps !== 'boolean') {
+  }
+
+  if (typeof req.body.logIps !== 'boolean') {
     return res.status(400).json({
       errors: ['You must choose whether to log IP addresses or not.'],
     });
-  } else if (!isValidHttpUrl(req.body.url)) {
+  }
+
+  if (!isValidHttpUrl(req.body.url)) {
     return res.status(400).json({
       errors: ['Invalid URL.'],
     });

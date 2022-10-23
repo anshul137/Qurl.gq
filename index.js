@@ -16,12 +16,12 @@ const client = new MongoClient(process.env['MONGO_URI'], {
 });
 
 client.connect((err) => {
-  if (!err) {
-    console.log('Connected to MongoDB');
-  } else {
-    console.log(err);
-    process.exit(1);
+  if (err) {
+    console.error(err);
+    return process.exit(1);
   }
+
+  console.log('Connected to MongoDB');
 });
 
 const urlCollection = client.db('prod').collection('urlCollection');
